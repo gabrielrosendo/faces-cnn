@@ -11,7 +11,6 @@ metadata_file = os.path.join(data_dir, 'wiki.mat')
 
 # Load the metadata from the .mat file
 metadata = scipy.io.loadmat(metadata_file)
-print(metadata)
 # Extract the relevant metadata
 wiki_data = metadata['wiki'][0, 0]
 image_paths = wiki_data[2][0]
