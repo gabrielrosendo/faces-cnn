@@ -1,0 +1,69 @@
+
+"""# Convert labels to categorical
+def shrinkToX(x, y):
+    result = []
+    print("len(x): ", len(x))
+    print("len(y): ", len(y))
+    if len(x) < len(y):
+        for i in range(len(x) + 1):
+            result.append(y[i])
+        return result
+    return y
+
+def gendersToArray(genders, x):
+    result = []
+    for gender in genders:
+        print("Original: ", gender)
+        if gender == 0:
+            print("[1,0,0]")
+            result.append(np.array([1,0,0]))
+        elif gender == 1:
+            print("[0,1,0]")
+            result.append(np.array([0,1,0]))
+        else :
+            print("[0,0,1]")
+            result.append(np.array([0,0,1]))
+    
+    return shrinkToX(x, result)
+
+y_train = gendersToArray(y_train_genders, x_train)
+y_val = gendersToArray(y_val_genders, x_val)
+y_test = gendersToArray(y_test_genders, x_test)
+
+
+for i in range (3):
+    image = Image.open(train_image_paths[i])
+    plt.imshow(image)
+    title = (f"Train Data\n"
+             f"Gender: {y_train_genders[i]}\n"
+             f"Gender: {y_train[i]}\n"
+             )
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
+ print("Length of x_train:", len(x_train))
+print("Length of y_train:", len(y_train))
+
+# Print the shape of the first few elements to verify data
+for i in range(min(5, len(x_train))):
+    print(f"x_train[{i}].shape: {x_train[i].shape}")
+    print(f"y_train[{i}]: {y_train[i]}")
+
+print("Length of x_val:", len(x_val))
+print("Length of y_val:", len(y_val))
+
+# Print the shape of the first few elements to verify data
+for i in range(min(5, len(x_val))):
+    print(f"x_val[{i}].shape: {x_val[i].shape}")
+    print(f"y_val[{i}]: {y_val[i]}")
+
+print("Length of x_test:", len(x_test))
+print("Length of y_test:", len(y_test))
+
+# Print the shape of the first few elements to verify data
+for i in range(min(5, len(x_test))):
+    print(f"x_test[{i}].shape: {x_test[i].shape}")
+    print(f"y_test[{i}]: {y_test[i]}")
+
+# Train the model
+history = model.fit(x_train, y_train, epochs=10, batch_size=32, validation_data=(x_val, y_val))
